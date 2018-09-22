@@ -1,6 +1,14 @@
 # UTN-LaboratorioDeComptacion-III
-Normalizacion  y creacion de base de datos y relaciones por codigo
 
-Creado el 22/09/2018
+Este repositorio contiene todo lo relacionado a la ejercitacion de la materia 
 
-Agregado del archibo TP_N1A_Comercio_Norman_Ruiz.sql el 22/09/2018
+- Clases precenciales
+- Clases a distancia
+- Trabajos practicos de ejercitacion
+- Trabajos practicos con entrega
+- Modelos de parcial
+- Etc.
+
+La resolucion de todo lo aqui presente fue desarrollada en su totalidad por mi, 
+lo que no la deja exenta de posibles inconsistencias de diseño o normalizacion, 
+ya que es parte de mi capasitacion universitaria. 
