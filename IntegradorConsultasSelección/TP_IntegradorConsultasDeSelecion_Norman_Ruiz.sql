@@ -178,7 +178,19 @@ where year(t.FECHAHORA) != 2015
 -- U) Listar para cada paciente la cantidad de turnos solicitados con médicos que realizan
 --    "Análisis" y la cantidad de turnos solicitados  con médicos de otras especialidades.
 
+select p.APELLIDO as apellido, p.NOMBRE as Nombre, 
+( select count (t.IDPACIENTE) ) as 'Cantidad turnos para analisis'
+from PACIENTES as p
+inner join turnos as t on t.IDPACIENTE = p.IDPACIENTE
 
+
+
+
+select t.IDPACIENTE
+from turnos as t
+inner join  MEDICOS as m on m.IDMEDICO = t.IDMEDICO
+inner join ESPECIALIDADES as e on e.IDESPECIALIDAD = m.IDESPECIALIDAD
+where e.NOMBRE like '%Análisis%'
 
 
 
