@@ -51,11 +51,23 @@ select * from VW_Ejercicio_D
 --     concepto de comisiones. 
 
 
+select m.APELLIDO as Apellido, m.NOMBRE as Nombre, sum(pxp.IMPORTE * m.comision) as Comision
+from PLATOS_X_PEDIDO as pxp
+inner join pedidos as p on p.IDPEDIDO = pxp.IDPEDIDO
+inner join mozos as m on m.IDMOZO = p.IDMOZO
+where m.IDMOZO = 1 and MONTH(pxp.FECHAHORA_INICIO) = 5 and year(pxp.FECHAHORA_INICIO) = 2012 
+group by m.APELLIDO, m.NOMBRE
 
 -- F - La cantidad de platos por categoría de plato. 
 
-
+select c.CATEGORIA,
+(select count(p.IDPLATO) from platos as p where p.IDCATEGORIA = c.IDCATEGORIA) as 'Cantidadde platos'
+from categorias as c
 
 -- G - Obtener un listado de los cinco platos más sencillos de hacer. (tener en cuenta la dificultad de 
 --     la preparación) 
- 
+
+select top 5 with ties *
+from platos as p
+order by p.DIFICULTAD asc
+
