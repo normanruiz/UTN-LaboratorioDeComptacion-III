@@ -63,17 +63,35 @@ inner join calificaciones as cl on cl.cfn_id = pl.pls_calificacion
 
 -- E) Obtener los países en los que se haya realizado alguna película (no tener en cuenta aquellos 
 --    países en los que no se realizó alguna película). 
-
+select ps.pss_pais as Pais, pl.pls_titulo as Titulo
+from paises as ps
+inner join peliculas as pl on pl.pls_idPssRealizacion = ps.pss_id
 
 -- F) Obtener el título de las películas y el país de realización. Incluir los países que no tienen alguna 
 --    película asociada completando con NULL el campo reservado para el título de película. 
-
+select pl.pls_titulo as Titulo, ps.pss_pais as Pais
+from peliculas as pl
+right join paises as ps on ps.pss_id = pl.pls_idPssRealizacion
 
 -- G) Obtener para cada actor su nombre y apellido y además el/los géneros de película en que haya 
 --    participado. Si ocurriese que un mismo actor haya participado en más de una película del mismo 
 --    género, esta combinación debe aparecer sólo una vez. 
-
+select ac.trs_nombre as Nombre,
+ac.trs_apellido as Apellido,
+gn.gnr_genero
+from actores as ac
+left join actoresXpelicula as axp on axp.axp_idActores = ac.trs_codActor
+left join generos as gn on gn.gnr_id = axp.axp_idPelicula
 
 -- H) Obtener un listado que contenga Apellido y nombre, fecha de nacimiento, título de película, 
 --    fecha de estreno y la edad que tenía el actor al momento del estreno de la película. 
 
+select ac.trs_apellido as Apellido,
+ac.trs_nombre as Nombre,
+ac.trs_fecNacimiento as 'Fecha de nacimiento',
+pl.pls_titulo as Titulo,
+pl.pls_fecEstreno as 'Fecha de estreno',
+(DATEDIFF(year, ac.trs_fecNacimiento,pl.pls_fecEstreno)) as 'Edad del actor al momento del estreno'
+from actores as ac
+left join actoresXpelicula as axp on axp.axp_idActores = ac.trs_codActor
+left join peliculas as pl on pl.pls_codPelicula = axp.axp_idPelicula
